@@ -292,3 +292,45 @@ function deleteMarker(id) {
     console.log('Delete marker with ID:', id);
     // Implement the functionality to delete the marker
 }
+
+function deleteMarker(id) {
+    if (confirm('Are you sure you want to delete this marker?')) {
+        // Send AJAX request to delete the marker
+        $.ajax({
+            url: 'map_delete.php',
+            method: 'GET',
+            data: { id: id },  // Send the marker ID
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Success - Update the UI (remove the row from DataTable)
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Remove the marker from the DataTable
+                        $('#markersTable').DataTable().row(`#marker_${id}`).remove().draw();
+                    });
+                } else {
+                    // Error - Show the message
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Try Again'
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'There was an issue with the deletion request.',
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                });
+            }
+        });
+    }
+}
