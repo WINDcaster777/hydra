@@ -1,16 +1,8 @@
 <?php
 session_start();
 
-// Database connection
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "hotel";
-$conn = mysqli_connect($server, $username, $password, $database);
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once ("../properties/connection.php");
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
