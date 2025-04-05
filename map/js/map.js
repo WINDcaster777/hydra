@@ -288,10 +288,6 @@ function editMarker(id) {
 }
 
 // Function to delete a marker (implementation needed)
-function deleteMarker(id) {
-    console.log('Delete marker with ID:', id);
-    // Implement the functionality to delete the marker
-}
 
 function deleteMarker(id) {
     if (confirm('Are you sure you want to delete this marker?')) {

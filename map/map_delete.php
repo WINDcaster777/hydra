@@ -1,13 +1,13 @@
 <?php
 // Include your database connection file
-include('db_connection.php');
+include('../properties/connection.php');
 
 // Check if an ID is passed via GET
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $marker_id = $_GET['id'];
 
     // Prepare SQL query to delete the marker from the database
-    $query = "DELETE FROM markers WHERE id = ?";
+    $query = "DELETE FROM facility WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $marker_id);
 
