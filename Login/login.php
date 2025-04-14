@@ -1,37 +1,3 @@
-<?php
-session_start();
-
-require ("../properties/connection.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get username and password from POST data
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
-
-    // Prepare statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->bind_result($db_password_value);
-
-    // Check if a record was returned
-    if ($stmt->fetch()) {
-        // For plain text passwords (for hashed passwords, use password_verify)
-        if ($password === $db_password_value) {
-            $_SESSION["username"] = $username;
-            header("Location:../admin/adminDash.php");
-            exit();
-        } else {
-            $error = "Invalid username or password!";
-        }
-    } else {
-        $error = "Invalid username or password!";
-    }
-    $stmt->close();
-    mysqli_close($conn);
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             justify-content: center;
             align-items: center;
         }
-        
+
         .login-container {
             background: #fff;
             padding: 30px;
@@ -53,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         input[type="text"], input[type="password"] {
             width: 80%;
             padding: 10px;
@@ -61,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        
+
         button {
             padding: 10px 25px;
             border: none;
@@ -70,10 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         .error {
             color: red;
             margin-bottom: 10px;
+        }
+
+        .register-button {
+            margin-top: 20px;
+            background-color: #007bff;
         }
     </style>
 </head>
@@ -86,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
+        <button class="register-button" onclick="window.location.href=('../registration/registration.php')">Register</button>
     </div>
 </body>
 </html>

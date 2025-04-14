@@ -17,6 +17,7 @@
                     <li class="nav-item"><a href="../map/map.php" class="nav-link text-white">Facility</a></li>
                     <li class="nav-item"><a href="/admin/guests.php" class="nav-link text-white">Guests</a></li>
                     <li class="nav-item"><a href="/admin/settings.php" class="nav-link text-white">Settings</a></li>
+                    <li class="nav-item"><a href="../login/login.php" class="nav-link text-white">Logout</a></li>
                 </ul>
             </div>
         </div>
