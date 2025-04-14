@@ -85,7 +85,7 @@
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
             <div class="form-group">
-                <button type="submit">Register</button>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
             </div>
         </form>
     </div>
